@@ -1,0 +1,199 @@
+﻿seize_idle_capital_button = {
+	name = "seize_idle_capital_button"
+	desc = "seize_idle_capital_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_seized_idle_capital }
+		investment_pool > 0
+		ig:ig_industrialists ?= {
+			is_marginal = no
+		}
+	}
+
+	effect = {
+		custom_tooltip = {
+			text = seize_idle_capital_pool_tt
+			add_investment_pool = {
+				value = investment_pool
+				multiply = -0.15
+			}
+		}
+		add_modifier = {
+			name = modifier_seized_idle_capital
+			days = 365
+		}
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = modifier_ig_seized_idle_capital
+				days = 365
+			}
+		}
+		add_radicals = {
+			value = 0.05
+			pop_type = capitalists
+		}
+	}
+
+	ai_chance = {
+		value = 10
+	}
+}
+
+enforce_syndicate_quotas_button = {
+	name = "enforce_syndicate_quotas_button"
+	desc = "enforce_syndicate_quotas_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_enforced_syndicate_quotas }
+		authority >= 100
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_enforced_syndicate_quotas
+			days = 365
+		}
+	}
+
+	ai_chance = {
+		value = 10
+	}
+}
+public_works_act_button = {
+	name = "public_works_act_button"
+	desc = "public_works_act_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_public_works_act }
+		bureaucracy > 0
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_public_works_act
+			days = 1460
+		}
+	}
+
+	ai_chance = {
+		value = 10
+	}
+}
+enact_autarky_button = {
+	name = "enact_autarky_button"
+	desc = "enact_autarky_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		has_law = law_type:law_protectionism
+		NOT = {
+			active_law:lawgroup_trade_policy ?= {
+				has_amendment = amendment_type:amendment_autarky
+			}
+		}
+	}
+
+	effect = {
+		random_interest_group = {
+			limit = { is_in_government = yes }
+			save_scope_as = autarky_sponsor_ig
+		}
+		active_law:lawgroup_trade_policy ?= {
+			add_amendment = {
+				type = amendment_type:amendment_autarky
+				sponsor = scope:autarky_sponsor_ig
+			}
+		}
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = modifier_ig_autarky_enacted
+				days = 1825
+			}
+		}
+		add_radicals = {
+			value = 0.10
+			pop_type = capitalists
+		}
+	}
+
+	ai_chance = {
+		value = 0
+	}
+}
+establish_state_grain_boards_button = {
+	name = "establish_state_grain_boards_button"
+	desc = "establish_state_grain_boards_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		authority >= 100
+		NOT = { has_modifier = modifier_state_grain_boards }
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_state_grain_boards
+			days = 1095
+		}
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = modifier_ig_state_grain_boards_landowners
+				days = 1095
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 5
+	}
+}
+
+agrarian_mechanization_subsidies_button = {
+	name = "agrarian_mechanization_subsidies_button"
+	desc = "agrarian_mechanization_subsidies_button_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_agrarian_mechanization_subsidies }
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_agrarian_mechanization_subsidies
+			days = 1095
+		}
+		add_modifier = {
+			name = modifier_agrarian_mechanization_subsidies_cost
+			days = 1095
+			multiplier = {
+				value = gdp
+				multiply = 0.0005
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 5
+	}
+}

@@ -1,0 +1,297 @@
+﻿# First Four Year Plan Modifiers
+modifier_four_year_plan_success_sol = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_standard_of_living_add = 1
+}
+
+modifier_four_year_plan_success_construction = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_construction_mult = 0.10
+}
+
+modifier_four_year_plan_success_interest = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_loan_interest_rate_add = -0.02
+}
+
+modifier_four_year_plan_overachiever_interest = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	country_loan_interest_rate_add = -0.05
+}
+
+modifier_four_year_plan_overachiever_throughput = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_group_bg_manufacturing_throughput_add = 0.15
+}
+
+modifier_ig_four_year_plan_overachiever_approval = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+modifier_four_year_plan_failure_interest = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_loan_interest_rate_add = 0.10
+}
+
+modifier_four_year_plan_failure_construction = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	state_construction_mult = -0.10
+}
+
+modifier_four_year_plan_failure_throughput = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	building_group_bg_manufacturing_throughput_add = -0.05
+}
+
+modifier_ig_four_year_plan_failure_approval = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+# Scripted Button Modifiers
+modifier_seized_idle_capital = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_construction_mult = 0.10
+}
+
+modifier_ig_seized_idle_capital = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+modifier_enforced_syndicate_quotas = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	country_authority_add = -100
+	building_group_bg_manufacturing_throughput_add = 0.10
+	state_standard_of_living_add = -0.5
+}
+
+modifier_public_works_act = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_construction_mult = 0.10
+	country_bureaucracy_mult = -0.10
+}
+
+# Repeatable Planning Cooldown & Milestone
+modifier_fyp_commission_review = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+}
+
+modifier_fyp_economic_miracle = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_standard_of_living_add = 1.0
+	building_group_bg_manufacturing_throughput_add = 0.15
+	state_construction_mult = 0.10
+	country_loan_interest_rate_add = -0.05
+	country_prestige_mult = 0.15
+}
+
+# Repeatable Plan Success Modifiers
+modifier_fyp_general_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	state_construction_mult = 0.10
+	state_infrastructure_mult = 0.10
+	country_loan_interest_rate_add = -0.02
+}
+
+modifier_fyp_military_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	building_arms_industry_throughput_add = 0.15
+	building_artillery_foundry_throughput_add = 0.15
+	building_munition_plant_throughput_add = 0.15
+	country_military_goods_cost_mult = -0.10
+}
+
+modifier_fyp_civilian_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	building_food_industry_throughput_add = 0.15
+	building_textile_mill_throughput_add = 0.15
+	building_furniture_manufactory_throughput_add = 0.15
+	state_standard_of_living_add = 0.5
+}
+
+modifier_fyp_heavy_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_steel_mill_throughput_add = 0.15
+	building_tooling_workshop_throughput_add = 0.15
+	building_motor_industry_throughput_add = 0.15
+	state_construction_mult = 0.10
+}
+
+modifier_fyp_sol_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_standard_of_living_add = 0.5
+	state_birth_rate_mult = 0.05
+	state_mortality_mult = -0.05
+}
+
+modifier_fyp_army_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_offense_mult = 0.15
+	unit_defense_mult = 0.15
+	building_training_rate_mult = 0.25
+}
+
+modifier_ig_fyp_armed_forces_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+modifier_ig_fyp_civilian_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+modifier_ig_fyp_industrialists_success = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+# Repeatable Plan Failure Modifiers
+modifier_fyp_general_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	state_construction_mult = -0.05
+	country_loan_interest_rate_add = 0.05
+}
+
+modifier_fyp_military_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	building_arms_industry_throughput_add = -0.10
+	building_artillery_foundry_throughput_add = -0.10
+	building_munition_plant_throughput_add = -0.10
+}
+
+modifier_fyp_civilian_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_standard_of_living_add = -0.5
+}
+
+modifier_fyp_heavy_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	building_steel_mill_throughput_add = -0.10
+	building_tooling_workshop_throughput_add = -0.10
+	building_motor_industry_throughput_add = -0.10
+}
+
+modifier_fyp_army_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_negative.dds
+	unit_offense_mult = -0.10
+	unit_defense_mult = -0.10
+}
+
+modifier_ig_fyp_armed_forces_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+modifier_ig_fyp_civilian_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+modifier_ig_fyp_industrialists_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+modifier_ig_fyp_sol_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+modifier_ig_autarky_enacted = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+modifier_ig_fyp_economic_miracle_attraction = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_pop_attraction_mult = 0.50
+}
+# Corporatized Agriculture Scripted Button & Failure Modifiers
+modifier_state_grain_boards = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = -100
+	building_group_bg_agriculture_throughput_add = 0.15
+	building_group_bg_ranching_throughput_add = 0.15
+}
+
+modifier_ig_state_grain_boards_landowners = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+modifier_agrarian_mechanization_subsidies = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_chemical_plant_throughput_add = 0.15
+	building_motor_industry_throughput_add = 0.15
+}
+
+modifier_agrarian_mechanization_subsidies_cost = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1
+}
+
+modifier_corporatized_agriculture_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	building_group_bg_agriculture_throughput_add = -0.10
+	building_group_bg_ranching_throughput_add = -0.10
+	state_standard_of_living_add = -1.0
+}
+
+modifier_ig_corporatized_agriculture_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+# First Four Year Plan Active Duration Modifiers
+modifier_first_four_year_plan_active = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_speed_mult = 0.30
+}
+modifier_movement_first_four_year_plan_corporatist = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	political_movement_pop_attraction_mult = 0.20
+}
+# Enabling Act Event Modifiers
+modifier_enabling_act_emergency_powers = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_authority_add = 150
+	country_authority_mult = 0.10
+}
+
+modifier_ig_enabling_act_opposition_outrage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -10
+}
+
+modifier_ig_enabling_act_constitutional_praise = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+modifier_ig_enabling_act_fascist_betrayal = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -10
+}
+# National Social Democracy Journal Entry Modifiers
+modifier_national_social_democracy = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_loyalists_from_political_movements_mult = 0.20
+	state_radicals_from_political_movements_mult = -0.20
+	country_authority_add = 100
+	country_prestige_mult = 0.05
+}
+
+modifier_ig_national_social_democracy_approval = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 5
+}
+
+modifier_national_social_democracy_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_authority_mult = -0.05
+}
+
+modifier_movement_national_social_democracy_failure = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	political_movement_pop_attraction_mult = 0.20
+}

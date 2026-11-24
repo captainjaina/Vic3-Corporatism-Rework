@@ -1,0 +1,10 @@
+﻿on_monthly_pulse_country = {
+	events = {
+		corporatized_economy.15
+		corporatized_economy.17
+	}
+	random_events = {
+		5 = 0
+		1 = corporatized_economy.14
+	}
+}
