@@ -1,0 +1,312 @@
+﻿namespace = rise_of_fascism
+
+# 1. Climax Event: The March on the Capital (at 100 Fascist Momentum)
+rise_of_fascism.1 = {
+	type = country_event
+	placement = root
+
+	title = rise_of_fascism.1.t
+	desc = rise_of_fascism.1.d
+	flavor = rise_of_fascism.1.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			save_scope_as = march_fascist_ig
+			leader = {
+				save_scope_as = march_fascist_leader
+			}
+		}
+	}
+
+	# Option A: Capitulate to the Ultimatum
+	option = {
+		name = rise_of_fascism.1.a
+		default_option = yes
+
+		if = {
+			limit = { exists = scope:march_fascist_ig }
+			scope:march_fascist_ig = {
+				add_ruling_interest_group = yes
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:march_fascist_leader
+				NOT = { has_law = law_type:law_monarchy }
+				NOT = { has_law = law_type:law_social_monarchy }
+			}
+			scope:march_fascist_leader = {
+				set_character_as_ruler = yes
+			}
+		}
+		add_modifier = {
+			name = modifier_mandate_of_the_march
+			years = 4
+		}
+		add_radicals = {
+			value = 0.12
+			pop_type = laborers
+		}
+		add_radicals = {
+			value = 0.15
+			pop_type = academics
+		}
+	}
+
+	# Option B: Refuse the Ultimatum & Fight
+	option = {
+		name = rise_of_fascism.1.b
+
+		if = {
+			limit = {
+				any_political_movement = {
+					is_political_movement_type = movement_fascist
+				}
+			}
+			random_political_movement = {
+				limit = { is_political_movement_type = movement_fascist }
+				add_radicalism = 1.0
+			}
+		}
+		else = {
+			create_political_movement = {
+				type = movement_fascist
+			}
+			random_political_movement = {
+				limit = { is_political_movement_type = movement_fascist }
+				add_radicalism = 1.0
+			}
+		}
+		add_radicals = {
+			value = 0.20
+			pop_type = shopkeepers
+		}
+		add_radicals = {
+			value = 0.15
+			pop_type = officers
+		}
+	}
+}
+
+# 2. Pulse Event: Street War Escalates
+rise_of_fascism.2 = {
+	type = country_event
+	placement = root
+
+	title = rise_of_fascism.2.t
+	desc = rise_of_fascism.2.d
+	flavor = rise_of_fascism.2.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_vandalized_storefront"
+	}
+
+	trigger = {
+		has_journal_entry = je_rise_of_fascism
+		NOT = { has_variable = rise_of_fascism_street_war_cd }
+	}
+
+	immediate = {
+		set_variable = {
+			name = rise_of_fascism_street_war_cd
+			days = 365
+		}
+	}
+
+	# Prosecute the Fascist Squads
+	option = {
+		name = rise_of_fascism.2.a
+		default_option = yes
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = -8 name = rise_of_fascism_progress_bar }
+		}
+		add_radicals = {
+			value = 0.06
+			pop_type = shopkeepers
+		}
+		ig:ig_trade_unions ?= {
+			add_modifier = {
+				name = modifier_fascist_coalition_boost
+				years = 2
+			}
+		}
+	}
+
+	# Turn a Blind Eye
+	option = {
+		name = rise_of_fascism.2.b
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = 8 name = rise_of_fascism_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_fascist_street_impunity
+			years = 2
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = laborers
+		}
+	}
+}
+
+# 3. Pulse Event: Captains of Industry Hedge Their Bets
+rise_of_fascism.3 = {
+	type = country_event
+	placement = root
+
+	title = rise_of_fascism.3.t
+	desc = rise_of_fascism.3.d
+	flavor = rise_of_fascism.3.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	trigger = {
+		has_journal_entry = je_rise_of_fascism
+		ig:ig_industrialists ?= { is_marginal = no }
+		NOT = { has_variable = rise_of_fascism_industry_cd }
+	}
+
+	immediate = {
+		set_variable = {
+			name = rise_of_fascism_industry_cd
+			days = 540
+		}
+	}
+
+	# Expose & Seize the Secret Funds
+	option = {
+		name = rise_of_fascism.3.a
+		default_option = yes
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = -8 name = rise_of_fascism_progress_bar }
+		}
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = modifier_elites_resent_relief_spending
+				years = 3
+			}
+		}
+	}
+
+	# Quietly Permit the Alliance (Seeds Corporatism & boosts Fascist Momentum)
+	option = {
+		name = rise_of_fascism.3.b
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = 10 name = rise_of_fascism_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_industrial_strike_breakers
+			years = 3
+		}
+		ig:ig_industrialists ?= {
+			leader ?= {
+				set_ideology = ideology:ideology_corporatist
+			}
+		}
+	}
+}
+
+# 4. Pulse Event: Demands for the Interior Ministry
+rise_of_fascism.4 = {
+	type = country_event
+	placement = root
+
+	title = rise_of_fascism.4.t
+	desc = rise_of_fascism.4.d
+	flavor = rise_of_fascism.4.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	trigger = {
+		has_journal_entry = je_rise_of_fascism
+		any_interest_group = {
+			is_in_government = yes
+			leader ?= {
+				OR = {
+					has_ideology = ideology:ideology_fascist
+					has_ideology = ideology:ideology_national_socialist
+					has_ideology = ideology:ideology_clerical_fascist
+				}
+			}
+		}
+		NOT = { has_variable = rise_of_fascism_ministry_cd }
+	}
+
+	immediate = {
+		set_variable = {
+			name = rise_of_fascism_ministry_cd
+			days = 540
+		}
+	}
+
+	# Refuse & Purge Fascist Ministers
+	option = {
+		name = rise_of_fascism.4.a
+		default_option = yes
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = -12 name = rise_of_fascism_progress_bar }
+		}
+		every_interest_group = {
+			limit = {
+				is_in_government = yes
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			remove_ruling_interest_group = yes
+			add_modifier = {
+				name = modifier_elites_resent_relief_spending
+				years = 3
+			}
+		}
+	}
+
+	# Hand Over the Ministries
+	option = {
+		name = rise_of_fascism.4.b
+
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = 15 name = rise_of_fascism_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_deputized_order_squads
+			years = 2
+		}
+	}
+}

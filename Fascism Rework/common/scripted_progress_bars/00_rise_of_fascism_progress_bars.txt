@@ -1,0 +1,193 @@
+﻿rise_of_fascism_progress_bar = {
+	name = "rise_of_fascism_progress_bar"
+	desc = "rise_of_fascism_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		# --- FACTORS INCREASING FASCIST MOMENTUM ---
+		if = {
+			limit = {
+				any_political_movement = {
+					is_political_movement_type = movement_fascist
+					political_movement_support >= 0.05
+				}
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_movement_support"
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_political_movement_type = movement_fascist
+					political_movement_radicalism >= 0.25
+				}
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_movement_radicalism"
+			}
+		}
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_ig_leaders"
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					is_incorporated = yes
+					turmoil >= 0.25
+				}
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_turmoil"
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ig:ig_trade_unions ?= { is_powerful = yes }
+					any_political_movement = {
+						OR = {
+							is_political_movement_type = movement_socialist
+							is_political_movement_type = movement_communist
+							is_political_movement_type = movement_anarchist
+						}
+						political_movement_radicalism >= 0.20
+					}
+				}
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_red_fear"
+			}
+		}
+		if = {
+			limit = {
+				government_legitimacy < 50
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_low_legitimacy"
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = modifier_fascist_backroom_bargain
+			}
+			add = {
+				value = 2
+				desc = "fascist_momentum_backroom_bargain"
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = modifier_deputized_order_squads
+			}
+			add = {
+				value = 3
+				desc = "fascist_momentum_deputized_squads"
+			}
+		}
+
+		# --- FACTORS DECREASING FASCIST MOMENTUM ---
+		if = {
+			limit = {
+				government_legitimacy >= 75
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						leader ?= {
+							OR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -2
+				desc = "fascist_momentum_high_legitimacy"
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_scope_state = {
+						is_incorporated = yes
+						turmoil >= 0.10
+					}
+				}
+			}
+			add = {
+				value = -2
+				desc = "fascist_momentum_domestic_peace"
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_secret_police
+					has_law = law_type:law_outlawed_dissent
+				}
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						leader ?= {
+							OR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = -2
+				desc = "fascist_momentum_state_repression"
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = modifier_banned_fascist_paramilitaries
+			}
+			add = {
+				value = -3
+				desc = "fascist_momentum_banned_militias"
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = modifier_emergency_public_relief
+			}
+			add = {
+				value = -2
+				desc = "fascist_momentum_emergency_relief"
+			}
+		}
+	}
+
+	start_value = 25
+	min_value = 0
+	max_value = 100
+}

@@ -1,0 +1,84 @@
+﻿# Climax Capitulation Modifier: Legitimacy & Law-Passing Window vs. Institutional Purge
+modifier_mandate_of_the_march = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 30
+	country_law_enactment_time_mult = -0.15
+	country_authority_mult = 0.15
+	country_bureaucracy_mult = -0.15
+	country_tech_spread_mult = -0.10
+	interest_group_ig_intelligentsia_approval_add = -5
+	interest_group_ig_trade_unions_approval_add = -5
+}
+
+# Button Modifiers
+modifier_banned_fascist_paramilitaries = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_add = -100
+	country_bureaucracy_add = -50
+	country_legitimacy_base_add = -5
+	interest_group_ig_petty_bourgeoisie_approval_add = -4
+	interest_group_ig_armed_forces_approval_add = -3
+}
+
+modifier_emergency_public_relief = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	country_bureaucracy_add = -100
+	country_expenses_add = 5000
+	state_turmoil_effects_mult = -0.15
+}
+
+modifier_elites_resent_relief_spending = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_approval_add = -4
+	interest_group_pol_str_mult = -0.05
+}
+
+modifier_fascist_backroom_bargain = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_authority_mult = 0.10
+	country_legitimacy_base_add = -15
+	interest_group_ig_intelligentsia_approval_add = -4
+	interest_group_ig_trade_unions_approval_add = -4
+}
+
+modifier_fascist_coalition_boost = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.20
+	interest_group_approval_add = 3
+}
+
+modifier_deputized_order_squads = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
+	state_turmoil_effects_mult = -0.25
+	country_law_enactment_time_mult = -0.10
+	country_bureaucracy_mult = -0.10
+	building_throughput_add = -0.05
+}
+
+# Resolution Outcome Modifiers
+modifier_fascism_defeated_crackdown = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 10
+	interest_group_ig_petty_bourgeoisie_approval_add = -4
+	interest_group_ig_trade_unions_pol_str_mult = 0.15
+}
+
+modifier_fascism_defeated_institutional = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_legitimacy_base_add = 15
+	country_bureaucracy_mult = -0.05
+	interest_group_ig_industrialists_approval_add = -3
+}
+
+# Pulse Event Modifiers
+modifier_fascist_street_impunity = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
+	country_legitimacy_base_add = -10
+	state_radicals_from_sol_change_mult = 0.15
+}
+
+modifier_industrial_strike_breakers = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	interest_group_ig_industrialists_approval_add = 3
+	interest_group_ig_trade_unions_approval_add = -5
+}

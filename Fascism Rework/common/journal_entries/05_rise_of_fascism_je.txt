@@ -1,0 +1,118 @@
+﻿je_rise_of_fascism = {
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_fascist.dds"
+
+	group = je_group_crises
+
+	is_shown_when_inactive = {
+		has_technology_researched = mass_propaganda
+		NOT = { has_variable = rise_of_fascism_resolved }
+		NOT = { has_law = law_type:law_corporate_state }
+		NOT = { has_law = law_type:law_single_party_state }
+	}
+
+	possible = {
+		OR = {
+			any_political_movement = {
+				is_political_movement_type = movement_fascist
+				OR = {
+					political_movement_support >= 0.10
+					political_movement_radicalism >= 0.20
+				}
+			}
+			any_interest_group = {
+				is_marginal = no
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		set_variable = {
+			name = rise_of_fascism_active
+			value = yes
+		}
+	}
+
+	scripted_progress_bar = rise_of_fascism_progress_bar
+
+	scripted_button = je_rise_of_fascism_ban_paramilitaries
+	scripted_button = je_rise_of_fascism_emergency_relief
+	scripted_button = je_rise_of_fascism_backroom_bargain
+	scripted_button = je_rise_of_fascism_deputize_squads
+
+	on_monthly_pulse = {
+		random_events = {
+			12 = 0
+			1 = rise_of_fascism.2
+			1 = rise_of_fascism.3
+			1 = rise_of_fascism.4
+		}
+	}
+
+	complete = {
+		OR = {
+			scope:journal_entry = {
+				"scripted_bar_progress(rise_of_fascism_progress_bar)" >= 100
+			}
+			has_law = law_type:law_corporate_state
+			has_law = law_type:law_single_party_state
+		}
+	}
+
+	on_complete = {
+		remove_variable = rise_of_fascism_active
+		set_variable = {
+			name = rise_of_fascism_resolved
+			value = yes
+		}
+		if = {
+			limit = {
+				NOT = { has_law = law_type:law_corporate_state }
+				NOT = { has_law = law_type:law_single_party_state }
+			}
+			trigger_event = { id = rise_of_fascism.1 popup = yes }
+		}
+		else = {
+			add_modifier = {
+				name = modifier_mandate_of_the_march
+				years = 4
+			}
+		}
+	}
+
+	fail = {
+		scope:journal_entry = {
+			"scripted_bar_progress(rise_of_fascism_progress_bar)" <= 0
+		}
+	}
+
+	on_fail = {
+		remove_variable = rise_of_fascism_active
+		set_variable = {
+			name = rise_of_fascism_resolved
+			value = yes
+		}
+		if = {
+			limit = { has_variable = used_fascist_crackdown }
+			add_modifier = {
+				name = modifier_fascism_defeated_crackdown
+				years = 5
+			}
+		}
+		else = {
+			add_modifier = {
+				name = modifier_fascism_defeated_institutional
+				years = 5
+			}
+		}
+	}
+
+	weight = 100
+	should_be_pinned_by_default = yes
+}

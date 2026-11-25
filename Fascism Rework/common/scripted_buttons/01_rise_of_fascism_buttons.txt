@@ -1,0 +1,229 @@
+﻿# 1. Hard Containment: Ban Party Paramilitaries
+je_rise_of_fascism_ban_paramilitaries = {
+	name = "je_rise_of_fascism_ban_paramilitaries"
+	desc = "je_rise_of_fascism_ban_paramilitaries_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_banned_fascist_paramilitaries }
+		NOT = { has_modifier = modifier_deputized_order_squads }
+		authority >= 100
+		bureaucracy >= 50
+		NOT = {
+			ruler ?= {
+				OR = {
+					has_ideology = ideology:ideology_fascist
+					has_ideology = ideology:ideology_national_socialist
+					has_ideology = ideology:ideology_clerical_fascist
+				}
+			}
+		}
+	}
+
+	effect = {
+		set_variable = { name = used_fascist_crackdown value = yes }
+		add_modifier = {
+			name = modifier_banned_fascist_paramilitaries
+			years = 2
+		}
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = -15 name = rise_of_fascism_progress_bar }
+		}
+		# Downside: Radicalizes Petty Bourgeoisie & Armed Forces, and emboldens Socialists
+		every_scope_pop = {
+			limit = {
+				OR = {
+					pop_has_primary_culture = yes
+				}
+				OR = {
+					is_pop_type = shopkeepers
+					is_pop_type = clerks
+					is_pop_type = officers
+					is_pop_type = soldiers
+				}
+			}
+			add_pop_wealth = 0
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = shopkeepers
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = officers
+		}
+		random_political_movement = {
+			limit = {
+				OR = {
+					is_political_movement_type = movement_socialist
+					is_political_movement_type = movement_communist
+					is_political_movement_type = movement_labor
+				}
+			}
+			add_radicalism = 0.10
+		}
+	}
+
+	ai_chance = {
+		base = 25
+		modifier = {
+			trigger = {
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+			}
+			factor = 0
+		}
+	}
+}
+
+# 2. Soft Containment: Emergency Public Relief & Work Programs
+je_rise_of_fascism_emergency_relief = {
+	name = "je_rise_of_fascism_emergency_relief"
+	desc = "je_rise_of_fascism_emergency_relief_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_emergency_public_relief }
+		bureaucracy >= 100
+		gold_reserves >= 0
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_emergency_public_relief
+			years = 3
+		}
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = -10 name = rise_of_fascism_progress_bar }
+		}
+		# Downside: Angers Industrialists & Landowners, who covertly fund the far right
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = modifier_elites_resent_relief_spending
+				years = 3
+			}
+		}
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = modifier_elites_resent_relief_spending
+				years = 3
+			}
+		}
+	}
+
+	ai_chance = {
+		base = 20
+	}
+}
+
+# 3. Collaboration / Acceleration: Strike a Backroom Bargain
+je_rise_of_fascism_backroom_bargain = {
+	name = "je_rise_of_fascism_backroom_bargain"
+	desc = "je_rise_of_fascism_backroom_bargain_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_fascist_backroom_bargain }
+		NOT = { has_modifier = modifier_banned_fascist_paramilitaries }
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_fascist_backroom_bargain
+			years = 3
+		}
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = 15 name = rise_of_fascism_progress_bar }
+		}
+		# Upside: Suppresses left-wing agitation; Downside: Radicalizes workers & intelligentsia
+		random_political_movement = {
+			limit = {
+				OR = {
+					is_political_movement_type = movement_socialist
+					is_political_movement_type = movement_communist
+					is_political_movement_type = movement_labor
+				}
+			}
+			add_radicalism = -0.15
+		}
+		add_radicals = {
+			value = 0.10
+			pop_type = laborers
+		}
+		add_radicals = {
+			value = 0.12
+			pop_type = academics
+		}
+		every_interest_group = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_fascist_coalition_boost
+				years = 3
+			}
+		}
+	}
+
+	ai_chance = {
+		base = 15
+	}
+}
+
+# 4. State Paramilitarism: Deputize Auxiliary "Order" Squads
+je_rise_of_fascism_deputize_squads = {
+	name = "je_rise_of_fascism_deputize_squads"
+	desc = "je_rise_of_fascism_deputize_squads_desc"
+
+	visible = {
+		je:je_rise_of_fascism ?= {
+			"scripted_bar_progress(rise_of_fascism_progress_bar)" >= 50
+		}
+	}
+
+	possible = {
+		NOT = { has_modifier = modifier_deputized_order_squads }
+		NOT = { has_modifier = modifier_banned_fascist_paramilitaries }
+	}
+
+	effect = {
+		add_modifier = {
+			name = modifier_deputized_order_squads
+			years = 3
+		}
+		je:je_rise_of_fascism ?= {
+			add_progress = { value = 15 name = rise_of_fascism_progress_bar }
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = machinists
+		}
+	}
+
+	ai_chance = {
+		base = 10
+	}
+}
