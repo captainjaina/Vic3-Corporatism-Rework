@@ -32,28 +32,12 @@
 		}
 	}
 
-	immediate = {
-		set_variable = {
-			name = rise_of_fascism_active
-			value = yes
-		}
-	}
-
 	scripted_progress_bar = rise_of_fascism_progress_bar
 
 	scripted_button = je_rise_of_fascism_ban_paramilitaries
 	scripted_button = je_rise_of_fascism_emergency_relief
 	scripted_button = je_rise_of_fascism_backroom_bargain
 	scripted_button = je_rise_of_fascism_deputize_squads
-
-	on_monthly_pulse = {
-		random_events = {
-			12 = 0
-			1 = rise_of_fascism.2
-			1 = rise_of_fascism.3
-			1 = rise_of_fascism.4
-		}
-	}
 
 	complete = {
 		OR = {
@@ -66,7 +50,6 @@
 	}
 
 	on_complete = {
-		remove_variable = rise_of_fascism_active
 		set_variable = {
 			name = rise_of_fascism_resolved
 			value = yes
@@ -93,7 +76,6 @@
 	}
 
 	on_fail = {
-		remove_variable = rise_of_fascism_active
 		set_variable = {
 			name = rise_of_fascism_resolved
 			value = yes
@@ -114,5 +96,4 @@
 	}
 
 	weight = 100
-	should_be_pinned_by_default = yes
 }

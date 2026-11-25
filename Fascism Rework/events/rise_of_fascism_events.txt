@@ -70,40 +70,39 @@ rise_of_fascism.1 = {
 		}
 	}
 
-	# Option B: Refuse the Ultimatum & Fight
+# Option B: Refuse the Ultimatum & Fight
 	option = {
 		name = rise_of_fascism.1.b
 
-		if = {
-			limit = {
-				any_political_movement = {
-					is_political_movement_type = movement_fascist
-				}
-			}
-			random_political_movement = {
-				limit = { is_political_movement_type = movement_fascist }
-				add_radicalism = 1.0
-			}
-		}
-		else = {
-			create_political_movement = {
-				type = movement_fascist
-			}
-			random_political_movement = {
-				limit = { is_political_movement_type = movement_fascist }
-				add_radicalism = 1.0
-			}
-		}
 		add_radicals = {
-			value = 0.20
+			value = 0.25
 			pop_type = shopkeepers
 		}
 		add_radicals = {
-			value = 0.15
+			value = 0.20
 			pop_type = officers
 		}
+		add_radicals = {
+			value = 0.15
+			pop_type = clerks
+		}
+		every_interest_group = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_elites_resent_relief_spending
+				years = 5
+			}
+		}
 	}
-}
+	}
 
 # 2. Pulse Event: Street War Escalates
 rise_of_fascism.2 = {

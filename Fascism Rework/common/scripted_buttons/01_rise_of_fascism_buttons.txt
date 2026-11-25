@@ -32,21 +32,6 @@ je_rise_of_fascism_ban_paramilitaries = {
 		je:je_rise_of_fascism ?= {
 			add_progress = { value = -15 name = rise_of_fascism_progress_bar }
 		}
-		# Downside: Radicalizes Petty Bourgeoisie & Armed Forces, and emboldens Socialists
-		every_scope_pop = {
-			limit = {
-				OR = {
-					pop_has_primary_culture = yes
-				}
-				OR = {
-					is_pop_type = shopkeepers
-					is_pop_type = clerks
-					is_pop_type = officers
-					is_pop_type = soldiers
-				}
-			}
-			add_pop_wealth = 0
-		}
 		add_radicals = {
 			value = 0.08
 			pop_type = shopkeepers
@@ -55,22 +40,18 @@ je_rise_of_fascism_ban_paramilitaries = {
 			value = 0.08
 			pop_type = officers
 		}
-		random_political_movement = {
-			limit = {
-				OR = {
-					is_political_movement_type = movement_socialist
-					is_political_movement_type = movement_communist
-					is_political_movement_type = movement_labor
-				}
+		ig:ig_trade_unions ?= {
+			add_modifier = {
+				name = modifier_fascist_coalition_boost
+				years = 2
 			}
-			add_radicalism = 0.10
 		}
 	}
 
 	ai_chance = {
-		base = 25
-		modifier = {
-			trigger = {
+		value = 25
+		if = {
+			limit = {
 				any_interest_group = {
 					is_in_government = yes
 					leader ?= {
@@ -82,7 +63,7 @@ je_rise_of_fascism_ban_paramilitaries = {
 					}
 				}
 			}
-			factor = 0
+			multiply = 0
 		}
 	}
 }
@@ -110,7 +91,6 @@ je_rise_of_fascism_emergency_relief = {
 		je:je_rise_of_fascism ?= {
 			add_progress = { value = -10 name = rise_of_fascism_progress_bar }
 		}
-		# Downside: Angers Industrialists & Landowners, who covertly fund the far right
 		ig:ig_industrialists ?= {
 			add_modifier = {
 				name = modifier_elites_resent_relief_spending
@@ -126,7 +106,7 @@ je_rise_of_fascism_emergency_relief = {
 	}
 
 	ai_chance = {
-		base = 20
+		value = 20
 	}
 }
 
@@ -151,17 +131,6 @@ je_rise_of_fascism_backroom_bargain = {
 		}
 		je:je_rise_of_fascism ?= {
 			add_progress = { value = 15 name = rise_of_fascism_progress_bar }
-		}
-		# Upside: Suppresses left-wing agitation; Downside: Radicalizes workers & intelligentsia
-		random_political_movement = {
-			limit = {
-				OR = {
-					is_political_movement_type = movement_socialist
-					is_political_movement_type = movement_communist
-					is_political_movement_type = movement_labor
-				}
-			}
-			add_radicalism = -0.15
 		}
 		add_radicals = {
 			value = 0.10
@@ -189,7 +158,7 @@ je_rise_of_fascism_backroom_bargain = {
 	}
 
 	ai_chance = {
-		base = 15
+		value = 15
 	}
 }
 
@@ -224,6 +193,6 @@ je_rise_of_fascism_deputize_squads = {
 	}
 
 	ai_chance = {
-		base = 10
+		value = 10
 	}
 }
