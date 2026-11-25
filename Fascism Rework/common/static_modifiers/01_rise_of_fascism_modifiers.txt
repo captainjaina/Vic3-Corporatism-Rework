@@ -1,7 +1,7 @@
-﻿# Climax Capitulation Modifier: Legitimacy & Law-Passing Window vs. Institutional Purge
+﻿# Climax Capitulation Modifier: Legitimacy Floor & Law-Passing Window vs. Institutional Purge
 modifier_mandate_of_the_march = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_legitimacy_base_add = 30
+	country_legitimacy_min_add = 30
 	country_law_enactment_success_add = 0.15
 	country_authority_mult = 0.15
 	country_bureaucracy_mult = -0.15

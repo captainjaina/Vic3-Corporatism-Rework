@@ -3,11 +3,39 @@
 
 	group = je_group_crises
 
+	scripted_button = je_rise_of_fascism_ban_paramilitaries
+	scripted_button = je_rise_of_fascism_emergency_relief
+	scripted_button = je_rise_of_fascism_backroom_bargain
+	scripted_button = je_rise_of_fascism_deputize_squads
+
 	is_shown_when_inactive = {
 		has_technology_researched = mass_propaganda
 		NOT = { has_variable = rise_of_fascism_resolved }
 		NOT = { has_law = law_type:law_corporate_state }
 		NOT = { has_law = law_type:law_single_party_state }
+	}
+
+	activation_description = {
+		has_technology_researched = mass_propaganda
+		OR = {
+			any_political_movement = {
+				is_political_movement_type = movement_fascist
+				OR = {
+					political_movement_support >= 0.10
+					political_movement_radicalism >= 0.20
+				}
+			}
+			any_interest_group = {
+				is_marginal = no
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+		}
 	}
 
 	possible = {
@@ -34,66 +62,78 @@
 
 	scripted_progress_bar = rise_of_fascism_progress_bar
 
-	scripted_button = je_rise_of_fascism_ban_paramilitaries
-	scripted_button = je_rise_of_fascism_emergency_relief
-	scripted_button = je_rise_of_fascism_backroom_bargain
-	scripted_button = je_rise_of_fascism_deputize_squads
-
-	complete = {
-		OR = {
-			scope:journal_entry = {
-				"scripted_bar_progress(rise_of_fascism_progress_bar)" >= 100
-			}
-			has_law = law_type:law_corporate_state
-			has_law = law_type:law_single_party_state
-		}
-	}
-
-	on_complete = {
-		set_variable = {
-			name = rise_of_fascism_resolved
-			value = yes
-		}
-		if = {
-			limit = {
-				NOT = { has_law = law_type:law_corporate_state }
-				NOT = { has_law = law_type:law_single_party_state }
-			}
-			trigger_event = { id = rise_of_fascism.1 popup = yes }
-		}
-		else = {
-			add_modifier = {
-				name = modifier_mandate_of_the_march
-				years = 4
+# Outcome 1: Fascism Triumphs (Momentum hits 100 or Corporate/Single-Party State is passed)
+	outcome = {
+		header = je_standard_completion_header
+		effect_header = je_standard_on_completion_header
+		color = "gold_positive"
+		conclusion_desc = je_standard_completion_conclusion_desc
+		trigger = {
+			OR = {
+				custom_tooltip = {
+					text = je_rise_of_fascism_complete_bar_tt
+					scope:journal_entry = {
+						"scripted_bar_progress(rise_of_fascism_progress_bar)" >= 100
+					}
+				}
+				has_law = law_type:law_corporate_state
+				has_law = law_type:law_single_party_state
 			}
 		}
-	}
-
-	fail = {
-		scope:journal_entry = {
-			"scripted_bar_progress(rise_of_fascism_progress_bar)" <= 0
-		}
-	}
-
-	on_fail = {
-		set_variable = {
-			name = rise_of_fascism_resolved
-			value = yes
-		}
-		if = {
-			limit = { has_variable = used_fascist_crackdown }
-			add_modifier = {
-				name = modifier_fascism_defeated_crackdown
-				years = 5
+		effect = {
+			set_variable = {
+				name = rise_of_fascism_resolved
+				value = yes
 			}
-		}
-		else = {
-			add_modifier = {
-				name = modifier_fascism_defeated_institutional
-				years = 5
+			if = {
+				limit = {
+					NOT = { has_law = law_type:law_corporate_state }
+					NOT = { has_law = law_type:law_single_party_state }
+				}
+				trigger_event = { id = rise_of_fascism.1 popup = yes }
+			}
+			else = {
+				add_modifier = {
+					name = modifier_mandate_of_the_march
+					years = 4
+				}
 			}
 		}
 	}
 
+	# Outcome 2: Fascism Contained (Momentum drops to 0)
+	outcome = {
+		header = je_standard_failure_header
+		effect_header = je_standard_on_failure_header
+		color = "blue_negative"
+		conclusion_desc = je_standard_failure_conclusion_desc
+		trigger = {
+			custom_tooltip = {
+				text = je_rise_of_fascism_fail_bar_tt
+				scope:journal_entry = {
+					"scripted_bar_progress(rise_of_fascism_progress_bar)" <= 0
+				}
+			}
+		}
+		effect = {
+			set_variable = {
+				name = rise_of_fascism_resolved
+				value = yes
+			}
+			if = {
+				limit = { has_variable = used_fascist_crackdown }
+				add_modifier = {
+					name = modifier_fascism_defeated_crackdown
+					years = 5
+				}
+			}
+			else = {
+				add_modifier = {
+					name = modifier_fascism_defeated_institutional
+					years = 5
+				}
+			}
+		}
+	}
 	weight = 100
 }

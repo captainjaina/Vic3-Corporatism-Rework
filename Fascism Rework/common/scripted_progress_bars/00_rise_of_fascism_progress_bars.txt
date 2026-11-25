@@ -14,7 +14,7 @@
 				}
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_movement_support"
 			}
 		}
@@ -26,7 +26,7 @@
 				}
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_movement_radicalism"
 			}
 		}
@@ -44,7 +44,7 @@
 				}
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_ig_leaders"
 			}
 		}
@@ -56,7 +56,7 @@
 				}
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_turmoil"
 			}
 		}
@@ -75,7 +75,7 @@
 				}
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_red_fear"
 			}
 		}
@@ -84,7 +84,7 @@
 				government_legitimacy < 50
 			}
 			add = {
-				value = 2
+				value = 1
 				desc = "fascist_momentum_low_legitimacy"
 			}
 		}
@@ -93,7 +93,7 @@
 				has_modifier = modifier_fascist_backroom_bargain
 			}
 			add = {
-				value = 2
+				value = 1.5
 				desc = "fascist_momentum_backroom_bargain"
 			}
 		}
@@ -102,7 +102,7 @@
 				has_modifier = modifier_deputized_order_squads
 			}
 			add = {
-				value = 3
+				value = 2
 				desc = "fascist_momentum_deputized_squads"
 			}
 		}
@@ -125,7 +125,7 @@
 				}
 			}
 			add = {
-				value = -2
+				value = -1
 				desc = "fascist_momentum_high_legitimacy"
 			}
 		}
@@ -139,7 +139,7 @@
 				}
 			}
 			add = {
-				value = -2
+				value = -1
 				desc = "fascist_momentum_domestic_peace"
 			}
 		}
@@ -163,7 +163,7 @@
 				}
 			}
 			add = {
-				value = -2
+				value = -1
 				desc = "fascist_momentum_state_repression"
 			}
 		}
@@ -172,7 +172,7 @@
 				has_modifier = modifier_banned_fascist_paramilitaries
 			}
 			add = {
-				value = -3
+				value = -2
 				desc = "fascist_momentum_banned_militias"
 			}
 		}
@@ -181,13 +181,13 @@
 				has_modifier = modifier_emergency_public_relief
 			}
 			add = {
-				value = -2
+				value = -1.5
 				desc = "fascist_momentum_emergency_relief"
 			}
 		}
 	}
 
-	start_value = 25
+	start_value = 20
 	min_value = 0
 	max_value = 100
 }

@@ -3,7 +3,9 @@
  je_rise_of_fascism_reason: "Militant nationalist leagues, uniformed street squads, and authoritarian demagogues are capitalizing on domestic unrest and fear of social revolution. Unless contained—or harnessed—they threaten to sweep away the existing constitutional order."
 
  rise_of_fascism_progress_bar: "Fascist Momentum"
- rise_of_fascism_progress_bar_desc: "Measures the growing political leverage, paramilitary intimidation, and institutional penetration of fascist movements within [ROOT.GetCountry.GetName]."
+ rise_of_fascism_progress_bar_desc: "Fascist Momentum"
+ je_rise_of_fascism_complete_bar_tt: "#bold Fascist Momentum#! reaches #v 100%#!"
+ je_rise_of_fascism_fail_bar_tt: "#bold Fascist Momentum#! drops to #v 0%#!"
 
  fascist_momentum_movement_support: "Active Fascist Movement"
  fascist_momentum_movement_radicalism: "Militant Fascist Agitation"
@@ -18,6 +20,8 @@
  fascist_momentum_state_repression: "Authoritarian Police Suppression"
  fascist_momentum_banned_militias: "Banned Party Paramilitaries"
  fascist_momentum_emergency_relief: "Emergency Public Works & Relief"
+
+ je_rise_of_fascism_goal: "Fascist Momentum reaches 100%, or falls to 0%."
 
  je_rise_of_fascism_ban_paramilitaries: "Ban Party Paramilitaries"
  je_rise_of_fascism_ban_paramilitaries_desc: "Deploy police and state administrators to outlaw uniformed militias, raid party headquarters, and arrest street agitators—risking backlash from nationalist middle classes and sympathetic officers."
