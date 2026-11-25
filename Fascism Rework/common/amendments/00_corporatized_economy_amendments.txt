@@ -8,10 +8,10 @@
 	modifier = {
 		building_nationalization_cost_mult = -0.30
 		building_nationalization_radicals_mult = -0.35
-		state_capitalists_investment_pool_efficiency_mult = -0.25
-		country_capitalists_pol_str_mult = -0.25
-		state_bureaucrats_investment_pool_efficiency_mult = 0.25
-		country_bureaucrats_pol_str_mult = 0.25
+		state_capitalists_investment_pool_efficiency_mult = -0.33
+		country_capitalists_pol_str_mult = -0.33
+		state_bureaucrats_investment_pool_efficiency_mult = 0.33
+		country_bureaucrats_pol_str_mult = 0.33
 		country_government_dividends_efficiency_add = 0.10
 		building_company_government_dividends_add = 0.10
 		country_free_charters_add = 1
