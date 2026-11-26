@@ -44,6 +44,10 @@ rise_of_fascism.1 = {
 			limit = { exists = scope:march_fascist_ig }
 			scope:march_fascist_ig = {
 				add_ruling_interest_group = yes
+				add_modifier = {
+					name = modifier_mandate_of_the_march_ig
+					years = 4
+				}
 			}
 		}
 		if = {
