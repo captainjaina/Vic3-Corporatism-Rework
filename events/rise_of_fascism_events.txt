@@ -230,7 +230,7 @@ rise_of_fascism.3 = {
 		}
 		ig:ig_industrialists ?= {
 			leader ?= {
-				set_ideology = ideology:ideology_corporatist
+				set_ideology = ideology:ideology_corporatist_leader
 			}
 		}
 	}

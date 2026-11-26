@@ -3,6 +3,21 @@
 		corporatized_economy.15
 		corporatized_economy.17
 	}
+	effect = {
+		if = {
+			limit = {
+				has_modifier = modifier_mandate_of_the_march
+				NOT = { has_variable = enabling_act_event_fired }
+			}
+			random = {
+				chance = 35
+				trigger_event = {
+					id = corporatized_economy.14
+					popup = yes
+				}
+			}
+		}
+	}
 	random_events = {
 		5 = 0
 		1 = corporatized_economy.14

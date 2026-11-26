@@ -28,7 +28,7 @@
 				ruler = {
 					OR = {
 						has_ideology = ideology:ideology_fascist
-						has_ideology = ideology:ideology_corporatist
+						has_ideology = ideology:ideology_corporatist_leader
 						has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
 					}
@@ -40,7 +40,7 @@
 				}
 				OR = {
 					has_ideology = ideology:ideology_fascist
-					has_ideology = ideology:ideology_corporatist
+					has_ideology = ideology:ideology_corporatist_leader
 					has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
 				}
@@ -70,7 +70,7 @@
 				ruler = {
 					OR = {
 						has_ideology = ideology:ideology_fascist
-						has_ideology = ideology:ideology_corporatist
+						has_ideology = ideology:ideology_corporatist_leader
 						has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
 					}
@@ -82,7 +82,7 @@
 				}
 				OR = {
 					has_ideology = ideology:ideology_fascist
-					has_ideology = ideology:ideology_corporatist
+					has_ideology = ideology:ideology_corporatist_leader
 					has_ideology = ideology:ideology_national_socialist
 					has_ideology = ideology:ideology_clerical_fascist
 				}
@@ -102,7 +102,7 @@
 				ruler = {
 					OR = {
 						has_ideology = ideology:ideology_fascist
-						has_ideology = ideology:ideology_corporatist
+						has_ideology = ideology:ideology_corporatist_leader
 						has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
 					}
@@ -122,7 +122,7 @@
 					}
 					OR = {
 						has_ideology = ideology:ideology_fascist
-						has_ideology = ideology:ideology_corporatist
+						has_ideology = ideology:ideology_corporatist_leader
 						has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
 					}

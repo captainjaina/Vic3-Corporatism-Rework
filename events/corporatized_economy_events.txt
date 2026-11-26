@@ -474,31 +474,84 @@ corporatized_economy.14 = {
 					}
 				}
 			}
+			# Path 3: Active Mandate of the March with a Fascist-led IG in government
+			AND = {
+				has_modifier = modifier_mandate_of_the_march
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+			}
 		}
 	}
 
 	immediate = {
 		set_variable = enabling_act_event_fired
-		ruler ?= {
-			interest_group ?= {
-				save_scope_as = fascist_enabling_ig
-			}
-			if = {
-				limit = {
+		if = {
+			limit = {
+				ruler ?= {
 					OR = {
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_authoritarian
 						has_ideology = ideology:ideology_national_socialist
 						has_ideology = ideology:ideology_clerical_fascist
+						interest_group ?= {
+							leader ?= {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_national_socialist
+									has_ideology = ideology:ideology_clerical_fascist
+								}
+							}
+						}
 					}
 				}
-				save_scope_as = fascist_enabling_leader
 			}
-			else = {
+			ruler ?= {
 				interest_group ?= {
-					leader ?= {
-						save_scope_as = fascist_enabling_leader
+					save_scope_as = fascist_enabling_ig
+				}
+				if = {
+					limit = {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_authoritarian
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
 					}
+					save_scope_as = fascist_enabling_leader
+				}
+				else = {
+					interest_group ?= {
+						leader ?= {
+							save_scope_as = fascist_enabling_leader
+						}
+					}
+				}
+			}
+		}
+		else = {
+			random_interest_group = {
+				limit = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				save_scope_as = fascist_enabling_ig
+				leader ?= {
+					save_scope_as = fascist_enabling_leader
 				}
 			}
 		}
@@ -557,14 +610,14 @@ corporatized_economy.14 = {
 						has_ideology = ideology:ideology_clerical_fascist
 					}
 					any_scope_character = {
-	this = root.ruler
-	OR = {
-		has_ideology = ideology:ideology_fascist
-		has_ideology = ideology:ideology_authoritarian
-		has_ideology = ideology:ideology_national_socialist
-		has_ideology = ideology:ideology_clerical_fascist
-	}
-}
+						this = root.ruler
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_authoritarian
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
 				}
 			}
 			add_modifier = {
