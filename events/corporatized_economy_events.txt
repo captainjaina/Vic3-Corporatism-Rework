@@ -495,24 +495,37 @@ corporatized_economy.14 = {
 		set_variable = enabling_act_event_fired
 		if = {
 			limit = {
-				ruler ?= {
-					OR = {
-						has_ideology = ideology:ideology_fascist
-						has_ideology = ideology:ideology_authoritarian
-						has_ideology = ideology:ideology_national_socialist
-						has_ideology = ideology:ideology_clerical_fascist
-						interest_group ?= {
-							leader ?= {
-								OR = {
-									has_ideology = ideology:ideology_fascist
-									has_ideology = ideology:ideology_national_socialist
-									has_ideology = ideology:ideology_clerical_fascist
-								}
-							}
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
 						}
 					}
 				}
 			}
+			ordered_interest_group = {
+				limit = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				order_by = ig_clout
+				position = 0
+				save_scope_as = fascist_enabling_ig
+				leader ?= {
+					save_scope_as = fascist_enabling_leader
+				}
+			}
+		}
+		else = {
 			ruler ?= {
 				interest_group ?= {
 					save_scope_as = fascist_enabling_ig
@@ -537,29 +550,40 @@ corporatized_economy.14 = {
 				}
 			}
 		}
-		else = {
-			random_interest_group = {
-				limit = {
-					is_in_government = yes
-					leader ?= {
-						OR = {
-							has_ideology = ideology:ideology_fascist
-							has_ideology = ideology:ideology_national_socialist
-							has_ideology = ideology:ideology_clerical_fascist
-						}
-					}
-				}
-				save_scope_as = fascist_enabling_ig
-				leader ?= {
-					save_scope_as = fascist_enabling_leader
-				}
-			}
-		}
 	}
 
 	option = {
 		name = corporatized_economy.14.a
 		default_option = yes
+		if = {
+			limit = {
+				exists = scope:fascist_enabling_ig
+			}
+			if = {
+				limit = {
+					scope:fascist_enabling_ig = {
+						is_in_government = no
+					}
+				}
+				scope:fascist_enabling_ig = {
+					add_ruling_interest_group = yes
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						has_law = law_type:law_monarchy
+						has_law = law_type:law_social_monarchy
+					}
+					ruler ?= {
+						NOT = { interest_group = scope:fascist_enabling_ig }
+					}
+				}
+				ruler ?= {
+					set_interest_group = scope:fascist_enabling_ig
+				}
+			}
+		}
 		if = {
 			limit = { has_law = law_type:law_monarchy }
 			activate_law = law_type:law_social_monarchy
