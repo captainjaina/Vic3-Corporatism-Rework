@@ -61,7 +61,7 @@ rise_of_fascism.1 = {
 			years = 4
 		}
 		add_radicals = {
-			value = 0.12
+			value = 0.10
 			pop_type = laborers
 		}
 		add_radicals = {

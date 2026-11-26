@@ -2,7 +2,7 @@
 	name = "rise_of_fascism_progress_bar"
 	desc = "rise_of_fascism_progress_bar_desc"
 
-	default = yes
+	default_bad = yes
 
 	monthly_progress = {
 		# --- FACTORS INCREASING FASCIST MOMENTUM ---
