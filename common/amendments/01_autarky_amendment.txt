@@ -1,0 +1,24 @@
+﻿amendment_autarky = {
+	allowed_laws = {
+		law_protectionism
+	}
+
+	modifier = {
+		state_import_advantage_mult = -0.40
+		state_export_advantage_mult = -0.10
+		building_group_bg_mining_throughput_add = 0.10
+		building_group_bg_oil_extraction_throughput_add = 0.10
+		building_group_bg_logging_throughput_add = 0.10
+		building_group_bg_fishing_throughput_add = 0.10
+		building_group_bg_whaling_throughput_add = 0.10
+		building_group_bg_rubber_throughput_add = 0.10
+		state_infrastructure_mult = 0.10
+		country_tech_spread_mult = -0.05
+	}
+
+	possible = {
+		active_law:lawgroup_economic_system ?= {
+			has_amendment = amendment_type:amendment_corporatized_economy
+		}
+	}
+}

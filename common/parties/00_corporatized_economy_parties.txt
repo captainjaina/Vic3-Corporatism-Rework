@@ -1,0 +1,30 @@
+﻿INJECT:fascist_party = {
+	join_weight = {
+		if = {
+			limit = {
+				leader ?= {
+					OR = {
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			value = {
+				add = 10
+				desc = "from_fascist"
+			}
+		}
+		if = {
+			limit = {
+				is_interest_group_type = ig_devout
+				leader ?= {
+					has_ideology = ideology:ideology_clerical_fascist
+				}
+			}
+			value = {
+				add = 5
+				desc = "from_clerical_fascist"
+			}
+		}
+	}
+}
