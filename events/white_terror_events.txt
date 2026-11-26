@@ -1,0 +1,207 @@
+﻿namespace = white_terror
+
+# 1. Special Tribunals & Show Trials
+white_terror.1 = {
+	type = country_event
+	placement = root
+
+	title = white_terror.1.t
+	desc = white_terror.1.d
+	flavor = white_terror.1.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_politicians_arguing"
+	}
+
+	trigger = {
+		has_journal_entry = je_white_terror
+		NOT = { has_variable = white_terror_tribunals_cd }
+	}
+
+	immediate = {
+		set_variable = {
+			name = white_terror_tribunals_cd
+			days = 450
+		}
+	}
+
+	# Full Summary Justice
+	option = {
+		name = white_terror.1.a
+		default_option = yes
+
+		je:je_white_terror ?= {
+			add_progress = { value = 10 name = white_terror_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_white_terror_tribunals
+			years = 2
+		}
+		add_radicals = {
+			value = 0.10
+			pop_type = laborers
+		}
+		add_radicals = {
+			value = 0.10
+			pop_type = academics
+		}
+	}
+
+	# Controlled Administrative Detention
+	option = {
+		name = white_terror.1.b
+
+		je:je_white_terror ?= {
+			add_progress = { value = 5 name = white_terror_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_white_terror_administrative_detention
+			years = 2
+		}
+	}
+}
+
+# 2. The General Staff Demands Immunity
+white_terror.2 = {
+	type = country_event
+	placement = root
+
+	title = white_terror.2.t
+	desc = white_terror.2.d
+	flavor = white_terror.2.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_military_parade"
+	}
+
+	trigger = {
+		has_journal_entry = je_white_terror
+		ig:ig_armed_forces ?= { is_marginal = no }
+		NOT = { has_variable = white_terror_general_staff_cd }
+		NOT = { has_variable = white_terror_subordinated_pillars }
+	}
+
+	immediate = {
+		set_variable = {
+			name = white_terror_general_staff_cd
+			days = 730
+		}
+	}
+
+	# Grant Military Autonomy
+	option = {
+		name = white_terror.2.a
+		default_option = yes
+
+		set_variable = { name = white_terror_general_staff_immune value = yes }
+		add_modifier = {
+			name = modifier_white_terror_general_staff_autonomy
+			years = 5
+		}
+	}
+
+	# Subordinate the General Staff
+	option = {
+		name = white_terror.2.b
+
+		je:je_white_terror ?= {
+			add_progress = { value = 8 name = white_terror_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_white_terror_purged_general_staff
+			years = 3
+		}
+		if = {
+			limit = { ruler ?= { has_ideology = ideology:ideology_national_socialist } }
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_national_socialist }
+			}
+		}
+		else_if = {
+			limit = { ruler ?= { has_ideology = ideology:ideology_clerical_fascist } }
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_clerical_fascist }
+			}
+		}
+		else = {
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_fascist }
+			}
+		}
+	}
+}
+
+# 3. Concordat or Kulturkampf
+white_terror.3 = {
+	type = country_event
+	placement = root
+
+	title = white_terror.3.t
+	desc = white_terror.3.d
+	flavor = white_terror.3.f
+
+	duration = 3
+
+	event_image = {
+		video = "unspecific_ruler_speaking_to_people"
+	}
+
+	trigger = {
+		has_journal_entry = je_white_terror
+		ig:ig_devout ?= { is_marginal = no }
+		NOT = { has_variable = white_terror_concordat_cd }
+	}
+
+	immediate = {
+		set_variable = {
+			name = white_terror_concordat_cd
+			days = 730
+		}
+	}
+
+	# Negotiate a Pragmatic Concordat
+	option = {
+		name = white_terror.3.a
+		default_option = yes
+
+		je:je_white_terror ?= {
+			add_progress = { value = 8 name = white_terror_progress_bar }
+		}
+		ig:ig_devout ?= {
+			add_modifier = {
+				name = modifier_white_terror_coopted_elite_ig
+				years = 4
+			}
+			leader ?= {
+				set_ideology = ideology:ideology_clerical_fascist
+			}
+		}
+	}
+
+	# Seize Confessional Schools & Youth Leagues
+	option = {
+		name = white_terror.3.b
+
+		je:je_white_terror ?= {
+			add_progress = { value = 10 name = white_terror_progress_bar }
+		}
+		ig:ig_devout ?= {
+			add_modifier = {
+				name = modifier_white_terror_crushed_ig
+				years = 5
+			}
+		}
+		add_radicals = {
+			value = 0.12
+			pop_type = clergymen
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = peasants
+		}
+	}
+}

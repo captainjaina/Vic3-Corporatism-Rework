@@ -1,0 +1,136 @@
+﻿white_terror_progress_bar = {
+	name = "white_terror_progress_bar"
+	desc = "white_terror_progress_bar_desc"
+
+	default = yes
+
+	monthly_progress = {
+		# --- FACTORS INCREASING REGIME CONSOLIDATION ---
+		if = {
+			limit = {
+				OR = {
+					has_law = law_type:law_secret_police
+					has_law = law_type:law_outlawed_dissent
+				}
+			}
+			add = {
+				value = 1.5
+				desc = "white_terror_state_security"
+			}
+		}
+		if = {
+			limit = {
+				has_law = law_type:law_militarized_police
+			}
+			add = {
+				value = 1
+				desc = "white_terror_militarized_police"
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						leader ?= {
+							NOR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+								has_ideology = ideology:ideology_corporatist_leader
+								has_ideology = ideology:ideology_authoritarian
+							}
+						}
+					}
+				}
+			}
+			add = {
+				value = 1
+				desc = "white_terror_aligned_cabinet"
+			}
+		}
+		if = {
+			limit = {
+				government_legitimacy >= 60
+			}
+			add = {
+				value = 1
+				desc = "white_terror_high_legitimacy"
+			}
+		}
+		if = {
+			limit = {
+				has_modifier = modifier_white_terror_tribunals
+			}
+			add = {
+				value = 1.5
+				desc = "white_terror_active_tribunals"
+			}
+		}
+
+		# --- FACTORS DECREASING REGIME CONSOLIDATION ---
+		if = {
+			limit = {
+				any_interest_group = {
+					is_marginal = no
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_vanguardist
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_state_socialist
+							has_ideology = ideology:ideology_radical
+						}
+					}
+				}
+			}
+			add = {
+				value = -1
+				desc = "white_terror_left_opposition"
+			}
+		}
+		if = {
+			limit = {
+				any_scope_state = {
+					is_incorporated = yes
+					turmoil >= 0.25
+				}
+			}
+			add = {
+				value = -1
+				desc = "white_terror_domestic_unrest"
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ig:ig_trade_unions ?= {
+						is_powerful = yes
+						is_in_government = no
+					}
+					ig:ig_intelligentsia ?= {
+						is_powerful = yes
+						is_in_government = no
+					}
+				}
+			}
+			add = {
+				value = -1.5
+				desc = "white_terror_powerful_civil_opposition"
+			}
+		}
+		if = {
+			limit = {
+				government_legitimacy < 40
+			}
+			add = {
+				value = -1
+				desc = "white_terror_weak_government"
+			}
+		}
+	}
+
+	start_value = 20
+	min_value = 0
+	max_value = 100
+}

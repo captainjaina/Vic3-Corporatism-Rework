@@ -1,0 +1,95 @@
+﻿# Outcome Modifiers (Variant-Specific)
+modifier_total_state_classical = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_mult = 0.20
+	country_law_enactment_success_add = 0.10
+	state_turmoil_effects_mult = -0.20
+	country_loyalists_from_legitimacy_mult = 0.20
+	country_tech_spread_mult = -0.05
+}
+
+modifier_total_state_natsoc = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_mult = 0.25
+	state_assimilation_mult = 0.25
+	state_turmoil_effects_mult = -0.25
+	unit_offense_mult = 0.10
+	unit_morale_recovery_mult = 0.10
+	state_conscription_rate_mult = 0.15
+	country_tech_spread_mult = -0.10
+}
+
+modifier_total_state_clerical = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_authority_mult = 0.15
+	state_conversion_mult = 0.25
+	state_birth_rate_mult = 0.025
+	state_turmoil_effects_mult = -0.20
+	interest_group_ig_devout_approval_add = 2
+	country_tech_spread_mult = -0.05
+}
+
+modifier_white_terror_backfired = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_legitimacy_base_add = -25
+	country_authority_mult = -0.20
+	building_group_bg_manufacturing_throughput_add = -0.10
+}
+
+# Alignment Button Modifiers
+modifier_white_terror_purge_aftermath = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
+	country_authority_add = -100
+	country_bureaucracy_add = -100
+	country_tech_spread_mult = -0.15
+	building_group_bg_manufacturing_throughput_add = -0.05
+}
+
+modifier_white_terror_crushed_ig = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	interest_group_pol_str_mult = -0.40
+	interest_group_approval_add = -5
+}
+
+modifier_white_terror_coopted_elite_ig = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_pol_str_mult = 0.20
+	interest_group_approval_add = 4
+}
+
+modifier_white_terror_institutional_crisis = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bureaucracy_mult = -0.10
+	unit_offense_mult = -0.15
+	unit_defense_mult = -0.15
+}
+
+modifier_white_terror_night_of_long_knives = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds"
+	country_authority_add = -100
+	country_legitimacy_base_add = -15
+}
+
+# Pulse Event Modifiers
+modifier_white_terror_tribunals = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_turmoil_effects_mult = -0.15
+	country_bureaucracy_add = -75
+}
+
+modifier_white_terror_administrative_detention = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bureaucracy_add = -150
+}
+
+modifier_white_terror_general_staff_autonomy = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	interest_group_ig_armed_forces_approval_add = 4
+	interest_group_ig_armed_forces_pol_str_mult = 0.15
+}
+
+modifier_white_terror_purged_general_staff = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	unit_morale_recovery_mult = -0.15
+	unit_offense_mult = -0.10
+}

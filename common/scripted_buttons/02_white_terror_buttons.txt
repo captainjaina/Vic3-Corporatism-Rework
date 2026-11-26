@@ -1,0 +1,416 @@
+﻿# 1. Smash the Red & Liberal Underground (Trade Unions & Intelligentsia)
+je_white_terror_smash_underground = {
+	name = "je_white_terror_smash_underground"
+	desc = "je_white_terror_smash_underground_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_variable = white_terror_smashed_underground }
+		authority >= 100
+		bureaucracy >= 100
+		OR = {
+			has_law = law_type:law_secret_police
+			has_law = law_type:law_outlawed_dissent
+			has_law = law_type:law_militarized_police
+		}
+	}
+
+	effect = {
+		set_variable = { name = white_terror_smashed_underground value = yes }
+		je:je_white_terror ?= {
+			add_progress = { value = 20 name = white_terror_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_white_terror_purge_aftermath
+			years = 4
+		}
+		ig:ig_trade_unions ?= {
+			add_modifier = {
+				name = modifier_white_terror_crushed_ig
+				years = 5
+			}
+			leader ?= {
+				set_ideology = ideology:ideology_corporatist_leader
+			}
+		}
+		ig:ig_intelligentsia ?= {
+			add_modifier = {
+				name = modifier_white_terror_crushed_ig
+				years = 5
+			}
+			leader ?= {
+				set_ideology = ideology:ideology_authoritarian
+			}
+		}
+		add_radicals = {
+			value = 0.15
+			pop_type = laborers
+		}
+		add_radicals = {
+			value = 0.15
+			pop_type = machinists
+		}
+		add_radicals = {
+			value = 0.15
+			pop_type = academics
+		}
+	}
+
+	ai_chance = {
+		value = 30
+	}
+}
+
+# 2. Co-opt the Economic & Landed Elites (Industrialists & Landowners)
+je_white_terror_coopt_elites = {
+	name = "je_white_terror_coopt_elites"
+	desc = "je_white_terror_coopt_elites_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_variable = white_terror_coopted_elites }
+		authority >= 100
+	}
+
+	effect = {
+		set_variable = { name = white_terror_coopted_elites value = yes }
+		je:je_white_terror ?= {
+			add_progress = { value = 15 name = white_terror_progress_bar }
+		}
+		ig:ig_industrialists ?= {
+			add_modifier = {
+				name = modifier_white_terror_coopted_elite_ig
+				years = 5
+			}
+			leader ?= {
+				set_ideology = ideology:ideology_corporatist_leader
+			}
+		}
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = modifier_white_terror_coopted_elite_ig
+				years = 5
+			}
+			leader ?= {
+				set_ideology = ideology:ideology_authoritarian
+			}
+		}
+		add_radicals = {
+			value = 0.08
+			pop_type = laborers
+		}
+	}
+
+	ai_chance = {
+		value = 25
+	}
+}
+
+# 3. Subordinate the Sword & Altar (Armed Forces & Devout)
+je_white_terror_subordinate_sword_altar = {
+	name = "je_white_terror_subordinate_sword_altar"
+	desc = "je_white_terror_subordinate_sword_altar_desc"
+
+	visible = {
+		always = yes
+	}
+
+	possible = {
+		NOT = { has_variable = white_terror_subordinated_pillars }
+		NOT = { has_variable = white_terror_general_staff_immune }
+		authority >= 100
+	}
+
+	effect = {
+		set_variable = { name = white_terror_subordinated_pillars value = yes }
+		je:je_white_terror ?= {
+			add_progress = { value = 15 name = white_terror_progress_bar }
+		}
+		if = {
+			limit = {
+				OR = {
+					ig:ig_armed_forces ?= { ig_approval < 0 }
+					ig:ig_devout ?= { ig_approval < 0 }
+				}
+			}
+			add_modifier = {
+				name = modifier_white_terror_institutional_crisis
+				years = 3
+			}
+		}
+		# Identify dominant regime fascist ideology (Ruler first, otherwise top governing fascist IG)
+		if = {
+			limit = {
+				ruler ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			ruler ?= { save_scope_as = regime_ideology_holder }
+		}
+		else = {
+			ordered_interest_group = {
+				limit = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				order_by = ig_clout
+				position = 0
+				leader ?= { save_scope_as = regime_ideology_holder }
+			}
+		}
+
+		if = {
+			limit = {
+				scope:regime_ideology_holder ?= { has_ideology = ideology:ideology_national_socialist }
+			}
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_national_socialist }
+			}
+			ig:ig_devout ?= {
+				leader ?= { set_ideology = ideology:ideology_national_socialist }
+			}
+		}
+		else_if = {
+			limit = {
+				scope:regime_ideology_holder ?= { has_ideology = ideology:ideology_clerical_fascist }
+			}
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_clerical_fascist }
+			}
+			ig:ig_devout ?= {
+				leader ?= { set_ideology = ideology:ideology_clerical_fascist }
+			}
+		}
+		else = {
+			ig:ig_armed_forces ?= {
+				leader ?= { set_ideology = ideology:ideology_fascist }
+			}
+			ig:ig_devout ?= {
+				leader ?= { set_ideology = ideology:ideology_clerical_fascist }
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 25
+	}
+}
+
+# 4. Settle Accounts Within the Movement (Internal Factional Purge)
+je_white_terror_settle_accounts = {
+	name = "je_white_terror_settle_accounts"
+	desc = "je_white_terror_settle_accounts_desc"
+
+	visible = {
+		NOT = { has_variable = white_terror_settled_accounts }
+		OR = {
+			# Case A: Regime led by Classical Fascist (Ruler or governing IG) vs. rival fascist faction
+			AND = {
+				OR = {
+					ruler ?= { has_ideology = ideology:ideology_fascist }
+					AND = {
+						ruler ?= {
+							NOR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+							}
+						}
+						any_interest_group = {
+							is_in_government = yes
+							leader ?= { has_ideology = ideology:ideology_fascist }
+						}
+					}
+				}
+				any_interest_group = {
+					is_marginal = no
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+			}
+			# Case B: Regime led by National Socialist vs. rival fascist faction
+			AND = {
+				OR = {
+					ruler ?= { has_ideology = ideology:ideology_national_socialist }
+					AND = {
+						ruler ?= {
+							NOR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+							}
+						}
+						any_interest_group = {
+							is_in_government = yes
+							leader ?= { has_ideology = ideology:ideology_national_socialist }
+						}
+					}
+				}
+				any_interest_group = {
+					is_marginal = no
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+			}
+			# Case C: Regime led by Clerical Fascist vs. rival fascist faction
+			AND = {
+				OR = {
+					ruler ?= { has_ideology = ideology:ideology_clerical_fascist }
+					AND = {
+						ruler ?= {
+							NOR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_national_socialist
+								has_ideology = ideology:ideology_clerical_fascist
+							}
+						}
+						any_interest_group = {
+							is_in_government = yes
+							leader ?= { has_ideology = ideology:ideology_clerical_fascist }
+						}
+					}
+				}
+				any_interest_group = {
+					is_marginal = no
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+						}
+					}
+				}
+			}
+		}
+	}
+
+	possible = {
+		authority >= 150
+	}
+
+	effect = {
+		set_variable = { name = white_terror_settled_accounts value = yes }
+		je:je_white_terror ?= {
+			add_progress = { value = 25 name = white_terror_progress_bar }
+		}
+		add_modifier = {
+			name = modifier_white_terror_night_of_long_knives
+			years = 2
+		}
+		add_radicals = {
+			value = 0.12
+			pop_type = shopkeepers
+		}
+		add_radicals = {
+			value = 0.12
+			pop_type = officers
+		}
+
+		# Identify dominant regime fascist ideology (Ruler first, otherwise top governing fascist IG)
+		if = {
+			limit = {
+				ruler ?= {
+					OR = {
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_national_socialist
+						has_ideology = ideology:ideology_clerical_fascist
+					}
+				}
+			}
+			ruler ?= { save_scope_as = regime_ideology_holder }
+		}
+		else = {
+			ordered_interest_group = {
+				limit = {
+					is_in_government = yes
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				order_by = ig_clout
+				position = 0
+				leader ?= { save_scope_as = regime_ideology_holder }
+			}
+		}
+
+		if = {
+			limit = {
+				scope:regime_ideology_holder ?= { has_ideology = ideology:ideology_fascist }
+			}
+			every_interest_group = {
+				limit = {
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_national_socialist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				leader ?= { set_ideology = ideology:ideology_fascist }
+			}
+		}
+		else_if = {
+			limit = {
+				scope:regime_ideology_holder ?= { has_ideology = ideology:ideology_national_socialist }
+			}
+			every_interest_group = {
+				limit = {
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_clerical_fascist
+						}
+					}
+				}
+				leader ?= { set_ideology = ideology:ideology_national_socialist }
+			}
+		}
+		else_if = {
+			limit = {
+				scope:regime_ideology_holder ?= { has_ideology = ideology:ideology_clerical_fascist }
+			}
+			every_interest_group = {
+				limit = {
+					leader ?= {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_national_socialist
+						}
+					}
+				}
+				leader ?= { set_ideology = ideology:ideology_clerical_fascist }
+			}
+		}
+	}
+
+	ai_chance = {
+		value = 35
+	}
+}

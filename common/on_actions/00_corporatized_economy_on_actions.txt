@@ -3,6 +3,28 @@
 		corporatized_economy.15
 		corporatized_economy.17
 	}
+	on_actions = {
+		on_corporatized_economy_monthly_pulse
+	}
+	random_events = {
+		5 = 0
+		1 = corporatized_economy.14
+	}
+	random_events = {
+		5 = 0
+		1 = rise_of_fascism.2
+		1 = rise_of_fascism.3
+		1 = rise_of_fascism.4
+	}
+	random_events = {
+		5 = 0
+		1 = white_terror.1
+		1 = white_terror.2
+		1 = white_terror.3
+	}
+}
+
+on_corporatized_economy_monthly_pulse = {
 	effect = {
 		if = {
 			limit = {
@@ -17,15 +39,5 @@
 				}
 			}
 		}
-	}
-	random_events = {
-		5 = 0
-		1 = corporatized_economy.14
-	}
-	random_events = {
-		5 = 0
-		1 = rise_of_fascism.2
-		1 = rise_of_fascism.3
-		1 = rise_of_fascism.4
 	}
 }
